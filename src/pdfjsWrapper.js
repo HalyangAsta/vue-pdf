@@ -1,4 +1,4 @@
-import { PDFLinkService } from 'pdfjs-dist/es5/web/pdf_viewer';
+import { PDFLinkService } from 'pdfjs-dist/es5/web/z';
 
 var pendingOperation = Promise.resolve();
 
@@ -52,7 +52,7 @@ export default function(PDFJS) {
 		canvasElt.getContext('2d').save();
 
 		function clearCanvas() {
-
+			console.log("width1", canvasElt.width)
 			canvasElt.getContext('2d').clearRect(0, 0, canvasElt.width, canvasElt.height);
 		}
 
@@ -74,6 +74,7 @@ export default function(PDFJS) {
 
 		this.getResolutionScale = function() {
 
+			console.log("offsetWidth", canvasElt.offsetWidth ,";width",canvasElt.width)
 			return canvasElt.offsetWidth / canvasElt.width;
 		}
 
@@ -209,6 +210,7 @@ export default function(PDFJS) {
 
 			emitEvent('page-size', viewport.width, viewport.height, scale);
 
+			console.log("width", viewport.width)
 			canvasElt.width = viewport.width;
 			canvasElt.height = viewport.height;
 
@@ -321,7 +323,7 @@ export default function(PDFJS) {
 			emitEvent('num-pages', undefined);
 
 			if ( !src ) {
-
+				
 				canvasElt.removeAttribute('width');
 				canvasElt.removeAttribute('height');
 				clearAnnotations();
